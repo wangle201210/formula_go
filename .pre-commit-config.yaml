@@ -1,0 +1,20 @@
+exclude: '\.pb\.go$'
+repos:
+  - repo: https://github.com/dnephin/pre-commit-golang
+    rev: v0.5.1
+    hooks:
+      - id: go-fmt
+      - id: go-imports
+      - id: golangci-lint
+      - id: go-cyclo
+        args: [ -over=20 ]
+      - id: validate-toml
+      - id: go-mod-tidy
+      - id: go-unit-tests
+        name: go unit tests
+        entry: bash -c "GOARCH=amd64 go test -v -gcflags=all=-l ./..."
+        pass_filenames: false
+        types: [ go ]
+        language: system
+      # - id: go-build
+
